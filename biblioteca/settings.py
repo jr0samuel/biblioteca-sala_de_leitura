@@ -38,9 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'livro',
-    # 'alunos' eu comentei
+    'livro'
 ]
+# 'alunos' depois de 'livro',
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
