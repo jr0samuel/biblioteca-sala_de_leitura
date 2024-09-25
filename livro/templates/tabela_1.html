@@ -1,0 +1,85 @@
+{% load static %}
+<!doctype html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <title>Home Prof - Tabela 1ª Série</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+        <script src="{% static 'js/script.js' %}"></script>
+        {% comment %} <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> {% endcomment %}
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js" 
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+        crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <main>
+            <nav class="navbar navbar-dark bg-dark">
+                <a href="{% url 'sala_de_leitura_admin' %}" class="btn btn-primary">Ir para Sala de Leitura</a>
+                <h5 class="navbar-brand" style="margin-right:125px;">Olá, {{prof.nome}}</h5>
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal2">
+                    Sair
+                </button>
+            </nav>
+
+            <div class="d-flex justify-content-around mt-2">
+                <a href="{% url 'tabela_2' %}" class="btn text-light bg-dark">Ir para Tabela da 2ª Série</a>
+                <a href="{% url 'tabela_3' %}" class="btn text-light bg-dark">Ir para Tabela da 3ª Série</a>
+            </div>
+
+            <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel2">Deseja mesmo sair?</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="{% url 'sair_admin' %}" class="btn btn-secondary">Sair</a>
+                    </div>
+                  </div>
+                </div>
+            </div>
+<br>
+            <div id="tabelas123" class="container">
+                <table id="tabela123" class="table table-striped table-bordered table-hover text-center">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nome do Aluno</th>
+                            <th scope="col">Livro</th>
+                            <th scope="col">Data de Empréstimo</th>
+                            <th scope="col">Data de Devolução</th>
+                        </tr>
+                    </thead>
+                    <tbody id="T_Body">
+                        <tr>
+                            <td scope="row"><input type="text" class="form-control campos" name="nome_aluno" aria-label="Nome do Aluno" aria-describedby="basic-addon1"></td>
+                            <td><input type="text" class="form-control campos" name="livro" aria-label="Livro" aria-describedby="basic-addon1"></td>
+                            <td><input type="text" class="form-control campos" name="data_de_emprestimo" aria-label="Data de Empréstimo" aria-describedby="basic-addon1"></td>
+                            <td><input type="text" class="form-control campos" name="data_de_devolucao" aria-label="Data de Devolução" aria-describedby="basic-addon1"></td>
+                        </tr>
+                    <tbody>
+                </table>
+                <div class="d-flex justify-content-around">
+                    <input type="button" value="Salvar Alterações" class="btn text-light bg-dark" onclick="salvaTabela()">
+                    <button id="maisTR" onclick="outroTR()" class="btn text-light bg-dark">Adicionar Linha</button>
+                </div>
+                <div class="d-flex justify-content-around pt-1">
+                    {% comment %} <button id="maisTR" onclick="outroTR()" class="btn text-light bg-dark">Adicionar Linha</button> {% endcomment %}
+                    <!-- como deixar o botão e o submit do tamanho da linha? -->
+                </div>
+            </div>
+
+        </main>
+
+        <div style="height:5vh;"></div>
+        <footer class="bg-dark d-flex justify-content-center align-items-center" style="height:65px;color:white">™ ® Copyright© &#169</footer>
+
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    </body>
+</html>
