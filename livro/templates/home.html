@@ -34,13 +34,8 @@
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <!-- <div class="modal-body">
-              ...
-            </div> -->
             <div class="modal-footer">
                 <a href="{% url 'sair' %}" class="btn btn-secondary">Sair</a>
-            <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                 <button type="button" class="btn btn-primary">Save changes</button> -->
             </div>
           </div>
         </div>
@@ -54,17 +49,17 @@
                     <div class="card" style="width: 18rem;">
                         <div class="card-body">
                             <ol id="list" style="list-style-type:none">
-                              <li class="book" value="{{livro.id}}"><h5 class="cartao cartao1 card-title py-1">{{livro.título}}</h5></li>
-                              <li class="book" value="{{livro.id}}"><h5 class="cartao cartao2 card-subtitle mb-2 text-muted py-1">{{livro.autor}}</h5></li>
-                              <li class="book" value="{{livro.id}}"><h6 class="cartao cartao3 card-subtitle mb-2 text-muted py-1">{{livro.local_Editora_Ano}}</h6></li>
-                              <li class="book" value="{{livro.id}}"><h6 class="cartao cart card-subtitle mb-2 text-muted py-1">Data de empréstimo: {{livro.data_de_empréstimo}}</h6></li>
-                              <li class="book" value="{{livro.id}}"><h6 class="cartao cart card-subtitle mb-2 text-muted py-1">Data de devolução: {{livro.data_de_devolução}}</h6></li>
+                              <li><h5 class="card-title py-1">{{livro.título}}</h5></li>
+                              <li><h5 class="card-subtitle mb-2 text-muted py-1">{{livro.autor}}</h5></li>
+                              <li><h6 class="card-subtitle mb-2 text-muted py-1">{{livro.local_Editora_Ano}}</h6></li>
+                              <li><h6 class="card-subtitle mb-2 text-muted py-1">Data de empréstimo: {{livro.data_de_empréstimo}}</h6></li>
+                              <li><h6 class="card-subtitle mb-2 text-muted py-1">Data de devolução: {{livro.data_de_devolução}}</h6></li>
                               {% if data_atual > livro.data_de_devolução %}
-                              <li class="book" value="{{livro.id}}"><h6 class="cartao cart card-subtitle mb-2 text-muted py-1">Livro com devolução pendente</h6></li>
+                              <li><h6 class="card-subtitle mb-2 text-muted py-1">Livro com devolução pendente</h6></li>
                               {% elif livro.data_de_devolução == data_atual %}
-                              <li class="book" value="{{livro.id}}"><h6 class="cartao cart card-subtitle mb-2 text-muted py-1">A data de entrega do livro é hoje</h6></li>
+                              <li><h6 class="card-subtitle mb-2 text-muted py-1">A data de entrega do livro é hoje</h6></li>
                               {% endif %}
-                              <a href="{% url 'ver_livro' livro.id %}" class="btn btn-info my-2 cartao cart">Ver Livro</a>
+                              <a href="{% url 'ver_livro' livro.id %}" class="btn btn-info my-2">Ver Livro</a>
                             </ol>
                         </div>
                     </div>

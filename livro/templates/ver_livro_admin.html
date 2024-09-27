@@ -27,13 +27,8 @@
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </div>
-                    <!-- <div class="modal-body">
-                      ...
-                    </div> -->
                     <div class="modal-footer">
                         <a href="{% url 'sair_admin' %}" class="btn btn-secondary">Sair</a>
-                    <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                         <button type="button" class="btn btn-primary">Save changes</button> -->
                     </div>
                   </div>
                 </div>
@@ -44,23 +39,23 @@
                 <div class="row">
                     <div class="col-md my-2">
                         <div class="card mx-auto" style="width: 25rem;">
-                            <div class="card-body text-center" value="{{livro.id}}">
+                            <div class="card-body text-center">
                                 <ol id="list" style="list-style-type:none; padding:5px;">
-                                    <li class="book cartao py-1"><img class="py-1 cartao" width="100%" src="{{livro.img.url}}"></li>
-                                    <li class="book"><h5 class="cartao cartao0 card-title py-1">ID: {{livro.id}}</h5></li>
-                                    <li class="book"><h5 class="cartao cartao0 card-title py-1">Tombo: {{livro.tombo}}</h5></li>
-                                    <li class="book"><h5 class="cartao cartao1 card-title py-1">{{livro.título}}</h5></li>
-                                    <li class="book"><h5 class="cartao cartao2 card-subtitle mb-2 text-muted py-1">{{livro.autor}}</h5></li>
-                                    <li class="book"><h6 class="cartao cartao3 card-subtitle mb-2 text-muted py-1">{{livro.local_Editora_Ano}}</h6></li>
+                                    <li class="py-1"><img class="py-1" width="100%" src="{{livro.img.url}}"></li>
+                                    <li><h5 class="card-title py-1">ID: {{livro.id}}</h5></li>
+                                    <li><h5 class="card-title py-1">Tombo: {{livro.tombo}}</h5></li>
+                                    <li><h5 class="card-title py-1">{{livro.título}}</h5></li>
+                                    <li><h5 class="card-subtitle mb-2 text-muted py-1">{{livro.autor}}</h5></li>
+                                    <li><h6 class="card-subtitle mb-2 text-muted py-1">{{livro.local_Editora_Ano}}</h6></li>
                                     {% if livro.quantidade <= 0 %}
-                                    <li class="book"><h6 class="cartao cart card-subtitle text-muted py-1">Livro não disponível. Aguarde estar disponível novamente.</h6></li>
+                                    <li><h6 class="card-subtitle text-muted py-1">Livro não disponível. Aguarde estar disponível novamente.</h6></li>
                                     {% else %}
-                                    <li class="book"><h6 class="cartao cart card-subtitle text-muted py-1">Quantidade disponível: {{livro.quantidade}}</h6></li>
+                                    <li><h6 class="card-subtitle text-muted py-1">Quantidade disponível: {{livro.quantidade}}</h6></li>
                                     {% endif %}
                                 </ol>
                                 {% if livro.quantidade == 0 %}
                                 {% else %}
-                                <button type="submit" class="btn btn-info cartao cart">Emprestar Livro</button>
+                                <button type="submit" class="btn btn-info">Emprestar Livro</button>
                                 {% endif %}
                             </div>
                         </div>
