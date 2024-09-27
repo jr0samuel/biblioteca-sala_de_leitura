@@ -75,7 +75,7 @@
                                         {% if livro.quantidade <= 0 %}
                                         {% else %}
                                             {% if aluno_logado %}
-                                            <button class="btn btn-info mt-1">Solicitar Empréstimo</button>
+                                            {% comment %} <button class="btn btn-info mt-1">Solicitar Empréstimo</button> {% endcomment %}
                                             {% else %}
                                             {% endif %}
                                         {% endif %}
