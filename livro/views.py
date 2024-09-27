@@ -11,11 +11,10 @@ from django.db.models import F
 ########## PARA TODOS ##########
 
 def inicio(request):
-    # return HttpResponse("Mundo Mário da Leitura")
-    return redirect('inicio.html', {})# parece que pode ser com ou sem {}
+    return render(request, 'inicio.html', {})
 ##########
 def sala(request):
-    return HttpResponse("Sala de Leitura")
+    return HttpResponse("Sala Ambiente de Leitura -- Mundo Mário da Leitura")
 ##########
 
 ########## ALUNO ##########
@@ -56,7 +55,6 @@ def devolver_livro(request, id):
     livro_devolver.save()
     livro_devolver.refresh_from_db()
     return redirect('/livro/home/')
-# ver esse redirect e o path vazio em biblioteca/urls
 
 def sala_de_leitura(request):
         if request.session.get('aluno'):
