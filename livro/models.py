@@ -15,8 +15,8 @@ class Livros(models.Model):
     local_Editora_Ano = models.CharField(max_length=100, blank = True, null = True)
     quantidade = models.IntegerField(blank = True, null = True)
     observação = models.CharField(max_length=100, blank = True, null = True)
-    data_de_empréstimo = models.DateField(blank = True, null = True)
-    data_de_devolução = models.DateField(blank = True, null = True)
+    data_de_empréstimo = models.CharField(max_length=20, blank = True, null = True)
+    data_de_devolução = models.CharField(max_length=20, blank = True, null = True)
     aluno = models.ForeignKey(Aluno, on_delete=models.DO_NOTHING, blank = True, null = True)
     prof = models.ForeignKey(Prof, on_delete=models.DO_NOTHING, blank = True, null = True)
 

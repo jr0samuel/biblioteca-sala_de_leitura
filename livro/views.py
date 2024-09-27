@@ -108,22 +108,31 @@ def ver_livro_admin(request, id):
             return HttpResponse('Esse livro não é seu')
     return redirect('/auth/login_admin/?status=2')
 
-def emprestar_livro(request, id):
-    livro_devolver = Livros.objects.get(id = id)
-    livro_devolver.quantidade = F('quantidade') - 1
-    livro_devolver.save()
-    livro_devolver.refresh_from_db()
-    return redirect('/livro/home_admin/')
+def emprestar_livro(request):
+    livro_id = request.POST.get('livro_id')
+    data_emprestimo = request.POST.get('data_emprestimo')
+    data_devolucao = request.POST.get('data_devolucao')
+    # aluno = request.POST.get('aluno')
+
+    livro_emprestar = Livros.objects.get(id = livro_id)
+    
+    livro_emprestar.data_de_empréstimo = data_emprestimo
+    livro_emprestar.data_de_devolução = data_devolucao
+    # livro_emprestar.aluno = aluno
+    livro_emprestar.quantidade = F('quantidade') - 1
+    livro_emprestar.save()
+    livro_emprestar.refresh_from_db()
+    return redirect(f'/livro/ver_livro_admin/{livro_id}')
 
 def devolver_livro_admin(request, id):
-    livro_devolver = Livros.objects.get(id = id)
-    livro_devolver.quantidade = F('quantidade') + 1
-    livro_devolver.aluno = None
-    livro_devolver.data_de_empréstimo = None
-    livro_devolver.data_de_devolução = None
-    livro_devolver.save()
-    livro_devolver.refresh_from_db()
-    return redirect('/livro/home_admin/')
+    livro_devolver_admin = Livros.objects.get(id = id)
+    livro_devolver_admin.quantidade = F('quantidade') + 1
+    livro_devolver_admin.aluno = None
+    livro_devolver_admin.data_de_empréstimo = None
+    livro_devolver_admin.data_de_devolução = None
+    livro_devolver_admin.save()
+    livro_devolver_admin.refresh_from_db()
+    return redirect(f'/livro/ver_livro_admin/{id}')
 
 def cadastrar_livro(request):
     if request.method == 'POST':
