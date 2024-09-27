@@ -80,9 +80,10 @@
                                     Quantidade disponível: {{livro.quantidade}}<br>
                                     {% endif %}
                                     {% if livro.quantidade == 0 %}
+                                    <a href="{% url 'ver_livro_admin' livro.id %}" class="btn btn-info mt-1">Devolver Livro</a>
                                     {% else %}
                                         {% if prof_logada %}
-                                        <a href="{% url 'ver_livro_admin' livro.id %}" class="btn btn-info mt-1">Emprestar Livro</a>
+                                        <a href="{% url 'ver_livro_admin' livro.id %}" class="btn btn-info mt-1">Emprestar ou Devolver Livro</a>
                                         {% else %}
                                         {% endif %}
                                     {% endif %}

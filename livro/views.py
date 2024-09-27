@@ -50,8 +50,8 @@ def devolver_livro(request, id):
     livro_devolver = Livros.objects.get(id = id)
     livro_devolver.quantidade = F('quantidade') + 1
     livro_devolver.aluno = None
-    livro_devolver.data_emprestimo = None
-    livro_devolver.data_devolucao = None
+    livro_devolver.data_de_empréstimo = None
+    livro_devolver.data_de_devolução = None
     livro_devolver.save()
     livro_devolver.refresh_from_db()
     return redirect('/livro/home/')
@@ -111,6 +111,16 @@ def ver_livro_admin(request, id):
 def emprestar_livro(request, id):
     livro_devolver = Livros.objects.get(id = id)
     livro_devolver.quantidade = F('quantidade') - 1
+    livro_devolver.save()
+    livro_devolver.refresh_from_db()
+    return redirect('/livro/home_admin/')
+
+def devolver_livro_admin(request, id):
+    livro_devolver = Livros.objects.get(id = id)
+    livro_devolver.quantidade = F('quantidade') + 1
+    livro_devolver.aluno = None
+    livro_devolver.data_de_empréstimo = None
+    livro_devolver.data_de_devolução = None
     livro_devolver.save()
     livro_devolver.refresh_from_db()
     return redirect('/livro/home_admin/')

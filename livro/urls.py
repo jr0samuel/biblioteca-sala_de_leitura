@@ -18,5 +18,6 @@ urlpatterns = [
     path('tabela_3/', views.tabela3, name='tabela_3'),
     path('sala_de_leitura_admin/', views.sala_de_leitura_admin, name='sala_de_leitura_admin'),
     path('ver_livro_admin/<int:id>', views.ver_livro_admin, name='ver_livro_admin'),
-    path('emprestar_livro/<int:id>', views.emprestar_livro, name='emprestar_livro')
+    path('emprestar_livro/<int:id>', views.emprestar_livro, name='emprestar_livro'),
+    path('devolver_livro_admin/<int:id>', views.devolver_livro_admin, name='devolver_livro_admin')
 ]

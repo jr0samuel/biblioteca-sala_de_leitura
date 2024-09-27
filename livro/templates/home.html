@@ -49,6 +49,7 @@
                     <div class="card" style="width: 18rem;">
                         <div class="card-body">
                             <ol id="list" style="list-style-type:none">
+                              <li><img class="py-1" width="100%" src="{{livro.img.url}}"></li>
                               <li><h5 class="card-title py-1">{{livro.título}}</h5></li>
                               <li><h5 class="card-subtitle mb-2 text-muted py-1">{{livro.autor}}</h5></li>
                               <li><h6 class="card-subtitle mb-2 text-muted py-1">{{livro.local_Editora_Ano}}</h6></li>
@@ -59,7 +60,8 @@
                               {% elif livro.data_de_devolução == data_atual %}
                               <li><h6 class="card-subtitle mb-2 text-muted py-1">A data de entrega do livro é hoje</h6></li>
                               {% endif %}
-                              <a href="{% url 'ver_livro' livro.id %}" class="btn btn-info my-2">Ver Livro</a>
+                              {% comment %} <a href="#" class="btn btn-info my-2">Ver Livro</a> {% endcomment %}
+                              {% comment %} {% url 'ver_livro' livro.id %} {% endcomment %}
                             </ol>
                         </div>
                     </div>
