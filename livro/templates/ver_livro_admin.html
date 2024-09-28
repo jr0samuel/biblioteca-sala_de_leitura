@@ -43,9 +43,9 @@
                             <ol id="list" style="list-style-type:none; padding:5px;">
                                 <input type="hidden" value="{{livro.id}}" name="livro_id">
                                 <li class="py-1"><img class="py-1" width="100%" src="{{livro.img.url}}"></li>
-                                <li><h5 class="card-title py-1">ID: {{livro.id}}</h5></li>
-                                <li><h5 class="card-title py-1">Tombo: {{livro.tombo}}</h5></li>
-                                <li><h5 class="card-title py-1">{{livro.título}}</h5></li>
+                                <li><h5 class="card-title">ID: {{livro.id}}</h5></li>
+                                <li><h5 class="card-title">Tombo: {{livro.tombo}}</h5></li>
+                                <li><h5 class="card-title">{{livro.título}}</h5></li>
                                 <li><h5 class="card-subtitle mb-2 text-muted py-1">{{livro.autor}}</h5></li>
                                 <li><h6 class="card-subtitle mb-2 text-muted py-1">{{livro.local_Editora_Ano}}</h6></li>
                                 {% if livro.quantidade <= 0 %}
@@ -53,19 +53,42 @@
                                 {% else %}
                                 <li><h6 class="card-subtitle text-muted py-1">Quantidade disponível: {{livro.quantidade}}</h6></li>
                                 {% endif %}
-                                <label>Data de Empréstimo: </label>
-                                <li><input class="form-control" name="data_emprestimo"></li>
-                                <label>Data de Devolução: </label>
-                                <li><input class="form-control" name="data_devolucao"></li>
-                                <label>Aluno</label>
+                                <label class="pt-1">Data de Empréstimo:</label>
+                                {% if livro.data_de_empréstimo == None %}
+                                <input type="date" class="form-control mb-1" name="data_emprestimo">
+                                {% else %}
+                                <label name="data_emprestimo">{{livro.data_de_empréstimo}}</label>
+                                {% endif %}
+                                <label class="pt-1">Data de Devolução:</label>
+                                {% if livro.data_de_devolução == None %}
+                                <input type="date" class="form-control mb-1" name="data_devolucao">
+                                {% else %}
+                                <label name="data_devolucao">{{livro.data_de_devolução}}</label>
+                                {% endif %}
+                                {% if livro.aluno == None %}
+                                <label class="pt-1">Aluno</label>
                                 <select class="form-control mb-1" name="aluno">
                                 {% for i in alunos %}
-                                    <option>{{i.nome}} | Turma: {{i.turma}} | RA: {{i.ra}}</option>
+                                <option value="{{livro.aluno}}" name="aluno">{{i.nome}} | Turma: {{i.turma}} | RA: {{i.ra}}</option>
                                 {% endfor %}
                                 </select>
+                                {% endif %}
+                                {% if livro.aluno != None %}
+                                <h5 class="card-title mt-4">Livro Emprestado para:</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">{{livro.aluno}}</h6>
+                                {% else %}
+                                <h5 class="card-title mt-4">Livro Não Emprestado</h5>
+                                {% endif %}
+                                {% if livro.aluno %}
+                                {% if data_atual > livro.data_de_devolução %}
+                                <li><h6 class="card-subtitle my-3 text-muted">Livro com devolução pendente</h6></li>
+                                {% elif livro.data_de_devolução == data_atual %}
+                                <li><h6 class="card-subtitle my-3 text-muted">A data de entrega do livro é hoje</h6></li>
+                                {% endif %}
+                                {% endif %}
                             {% if livro.quantidade == 0 %}
                             {% else %}
-                            <button type="submit" class="btn btn-info mt-1">Emprestar Livro</button>
+                            <button type="submit" class="btn btn-info mt-3">Emprestar Livro</button>
                             {% endif %}
                         </div>
                     </div>
@@ -79,15 +102,28 @@
                             <div class="card-body text-center">
                                 <ol id="list" style="list-style-type:none; padding:5px;">
                                     <li class="py-1"><img class="py-1" width="100%" src="{{livro.img.url}}"></li>
-                                    <li><h5 class="card-title py-1">ID: {{livro.id}}</h5></li>
-                                    <li><h5 class="card-title py-1">Tombo: {{livro.tombo}}</h5></li>
-                                    <li><h5 class="card-title py-1">{{livro.título}}</h5></li>
+                                    <li><h5 class="card-title">ID: {{livro.id}}</h5></li>
+                                    <li><h5 class="card-title">Tombo: {{livro.tombo}}</h5></li>
+                                    <li><h5 class="card-title">{{livro.título}}</h5></li>
                                     <li><h5 class="card-subtitle mb-2 text-muted py-1">{{livro.autor}}</h5></li>
                                     <li><h6 class="card-subtitle mb-2 text-muted py-1">{{livro.local_Editora_Ano}}</h6></li>
                                     {% if livro.quantidade <= 0 %}
                                     <li><h6 class="card-subtitle text-muted py-1">Livro não disponível. Aguarde estar disponível novamente.</h6></li>
                                     {% else %}
                                     <li><h6 class="card-subtitle text-muted py-1">Quantidade disponível: {{livro.quantidade}}</h6></li>
+                                    {% endif %}
+                                    {% if livro.aluno != None %}
+                                    <h5 class="card-title mt-4">Livro Emprestado para:</h5>
+                                    <h6 class="card-subtitle mb-2 text-muted">{{livro.aluno}}</h6>
+                                    {% else %}
+                                    <h5 class="card-title mt-4">Livro Não Emprestado</h5>
+                                    {% endif %}
+                                    {% if livro.aluno %}
+                                    {% if data_atual > livro.data_de_devolução %}
+                                    <li><h6 class="card-subtitle my-3 text-muted">Livro com devolução pendente</h6></li>
+                                    {% elif livro.data_de_devolução == data_atual %}
+                                    <li><h6 class="card-subtitle my-3 text-muted">A data de entrega do livro é hoje</h6></li>
+                                    {% endif %}
                                     {% endif %}
                                 </ol>
                                 <button type="submit" class="btn btn-info">Devolver Livro</button>

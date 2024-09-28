@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from alunos.models import Aluno, Prof
-from .models import Livros
+from .models import Livros, Planilha
+from .forms import CadastroLivro, PlanilhaForm
 from datetime import date, datetime
-from .forms import CadastroLivro
 from django.db.models import F
 
 # Create your views here.
@@ -99,11 +99,13 @@ def ver_livro_admin(request, id):
         if request.session.get('prof') == livro.prof.id:
             prof = Prof.objects.get(id = request.session['prof'])
             alunos = Aluno.objects.all()
+            data_atual = date.today
             return render(request, 'ver_livro_admin.html', {'livro': livro,
                                                             'id_livro': id,
                                                             'prof_logada': request.session.get('prof'),
                                                             'prof': prof,
-                                                            'alunos': alunos})
+                                                            'alunos': alunos,
+                                                            'data_atual': data_atual})
         else:
             return HttpResponse('Esse livro não é seu')
     return redirect('/auth/login_admin/?status=2')
@@ -112,17 +114,19 @@ def emprestar_livro(request):
     livro_id = request.POST.get('livro_id')
     data_emprestimo = request.POST.get('data_emprestimo')
     data_devolucao = request.POST.get('data_devolucao')
-    # aluno = request.POST.get('aluno')
+    aluno = request.POST.get('aluno')
 
     livro_emprestar = Livros.objects.get(id = livro_id)
-    
-    livro_emprestar.data_de_empréstimo = data_emprestimo
-    livro_emprestar.data_de_devolução = data_devolucao
-    # livro_emprestar.aluno = aluno
-    livro_emprestar.quantidade = F('quantidade') - 1
-    livro_emprestar.save()
-    livro_emprestar.refresh_from_db()
-    return redirect(f'/livro/ver_livro_admin/{livro_id}')
+    if livro_emprestar.prof.id == request.session['prof']:
+        livro_emprestar.data_de_empréstimo = data_emprestimo
+        livro_emprestar.data_de_devolução = data_devolucao
+        # livro_emprestar.aluno = aluno
+        livro_emprestar.quantidade = F('quantidade') - 1
+        livro_emprestar.save()
+        livro_emprestar.refresh_from_db()
+        return redirect(f'/livro/ver_livro_admin/{livro_id}')
+    else:
+        return redirect('/livro/ver_livro_admin/?livro_não_emprestado')
 
 def devolver_livro_admin(request, id):
     livro_devolver_admin = Livros.objects.get(id = id)
@@ -164,3 +168,21 @@ def tabela3(request):
         return render(request, 'tabela_3.html', {'prof': prof})
     else:
         return redirect('/auth/login_admin/?status=2')
+
+def planilha_upload(request):
+    prof = Prof.objects.get(id = request.session['prof'])
+    if request.method == 'POST':
+        form = PlanilhaForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('/livro/planilha_upload')
+    else:
+        form = PlanilhaForm()
+    return render(request, 'planilha_upload.html', {'form': form,
+                                                     'prof': prof})
+
+def planilhas(request):
+    prof = Prof.objects.get(id = request.session['prof'])
+    planilhas = Planilha.objects.all()
+    return render(request, 'planilhas.html', {'planilhas': planilhas,
+                                              'prof': prof})

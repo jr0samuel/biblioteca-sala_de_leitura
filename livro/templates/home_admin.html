@@ -50,6 +50,10 @@
             <a href="{% url 'tabela_2' %}" class="btn text-light bg-dark">Ir para Tabela da 2ª Série</a>
             <a href="{% url 'tabela_3' %}" class="btn text-light bg-dark">Ir para Tabela da 3ª Série</a>
         </div>
+        <div class="d-flex justify-content-around mt-2">
+            <a href="{% url 'planilha_upload' %}" class="btn text-light bg-dark">Upload de Planilha</a>
+            <a href="{% url 'planilhas' %}" class="btn text-light bg-dark">Ir para as 3 Tabelas</a>
+        </div>
 
         <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -67,7 +71,7 @@
             </div>
         </div>
 
-        <div class="row d-flex justify-content-around align-items-center mx-auto" style="height:440px;">
+        <div class="row d-flex justify-content-around align-items-center mx-auto" style="height:350px;">
             <button id="botaodadiv" type="button" class="btn btn-info text-center p-5 ml-5" style="font-size:1.5rem" data-toggle="modal" data-target="#exampleModal">
                 Cadastrar Livro
             </button>

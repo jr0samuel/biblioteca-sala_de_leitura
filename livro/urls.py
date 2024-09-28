@@ -19,5 +19,7 @@ urlpatterns = [
     path('sala_de_leitura_admin/', views.sala_de_leitura_admin, name='sala_de_leitura_admin'),
     path('ver_livro_admin/<int:id>', views.ver_livro_admin, name='ver_livro_admin'),
     path('emprestar_livro/', views.emprestar_livro, name='emprestar_livro'),
-    path('devolver_livro_admin/<int:id>', views.devolver_livro_admin, name='devolver_livro_admin')
+    path('devolver_livro_admin/<int:id>', views.devolver_livro_admin, name='devolver_livro_admin'),
+    path('planilha_upload/', views.planilha_upload, name='planilha_upload'),
+    path('planilhas/', views.planilhas, name='planilhas')
 ]
