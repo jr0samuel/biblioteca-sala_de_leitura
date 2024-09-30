@@ -16,12 +16,30 @@ function buscar_livro() {
 
 
 
-function outroTR() {
-    let tabela = document.querySelector('#tabela123')
-    tabela.innerHTML += `<tr>
-        <td scope="row"><input type="text" class="form-control campos" name="nome_aluno" aria-label="Nome do Aluno" aria-describedby="basic-addon1"></td>
-        <td><input type="text" class="form-control campos" name="livro" aria-label="Livro" aria-describedby="basic-addon1"></td>
-        <td><input type="text" class="form-control campos" name="data_de_emprestimo" aria-label="Data de Empréstimo" aria-describedby="basic-addon1"></td>
-        <td><input type="text" class="form-control campos" name="data_de_devolucao" aria-label="Data de Devolução" aria-describedby="basic-addon1"></td>
-    </tr>`
+// function outroTR1() {
+//     let tabela1 = document.querySelector('#tabela_1')
+//     tabela1.innerHTML += `<tr><td scope="row"><input type="text" class="form-control" aria-describedby="basic-addon1"></td>`
+// }
+
+const localStorage1 = 'tabela-um'
+const input_display = document.querySelector('#inputDisplay')
+
+function salvarInput1(){
+    if(input_display.value){
+        let infos = JSON.parse(localStorage.getItem(localStorage1) || "[]")
+        infos.push({info: input_display.value})
+        localStorage.setItem(localStorage1, JSON.stringify(infos))
+        showInfos()
+        console.log(input_display.value)
+    }
 }
+
+function showInfos(){
+    let infos = JSON.parse(localStorage.getItem(localStorage1) || "[]")
+    let listagem = document.getElementById('planilha')
+    listagem.innerHTML = ""
+    for(let i = 0; i < infos.length; i++){
+        listagem.innerHTML += `<li>${values[i]['info']}</li>`
+    }
+}
+showInfos()

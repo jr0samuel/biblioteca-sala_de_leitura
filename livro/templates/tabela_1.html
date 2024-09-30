@@ -47,29 +47,24 @@
                 </div>
             </div>
 <br>
-            <div id="tabelas123" class="container">
-                <table id="tabela123" class="table table-striped table-bordered table-hover text-center">
+            <div id="tabela1" class="container">
+                <table id="tabela_1" class="table table-striped table-bordered table-hover text-center">
                     <thead>
                         <tr>
-                            <th scope="col">Nome do Aluno</th>
-                            <th scope="col">Livro</th>
-                            <th scope="col">Data de Empréstimo</th>
-                            <th scope="col">Data de Devolução</th>
+                            <th scope="col" class="d-flex justify-content-between px-5"><span>Nome do Aluno</span> | <span>Nome do Livro</span> | <span>Data de Empréstimo</span> | <span>Data de Devolução</span></th>
                         </tr>
                     </thead>
-                    <tbody id="T_Body">
+                    <tbody id="TBody1">
                         <tr>
-                            <td scope="row"><input type="text" class="form-control campos" name="nome_aluno" aria-label="Nome do Aluno" aria-describedby="basic-addon1"></td>
-                            <td><input type="text" class="form-control campos" name="livro" aria-label="Livro" aria-describedby="basic-addon1"></td>
-                            <td><input type="text" class="form-control campos" name="data_de_emprestimo" aria-label="Data de Empréstimo" aria-describedby="basic-addon1"></td>
-                            <td><input type="text" class="form-control campos" name="data_de_devolucao" aria-label="Data de Devolução" aria-describedby="basic-addon1"></td>
+                            <td scope="row"><input id="inputDisplay" type="text" class="form-control" aria-label="Nome do Aluno" aria-describedby="basic-addon1"></td>
                         </tr>
                     <tbody>
                 </table>
-                <div class="d-flex justify-content-around">
-                    <input type="button" value="Salvar Alterações" class="btn text-light bg-dark" onclick="salvarInputs()">
-                    <button id="maisTR" onclick="outroTR()" class="btn text-light bg-dark">Adicionar Linha</button>
+                <div class="d-flex justify-content-around bg-dark">
+                    <button id="btnsavetableum" class="btn text-light bg-dark" onclick="salvarInput1()">Salvar Alterações</button>
                 </div>
+                <hr>                
+                <div><ol id="planilha"></ol></div>
             </div>
 
         </main>

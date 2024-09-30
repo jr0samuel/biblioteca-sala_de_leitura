@@ -57,16 +57,18 @@
             </div>
         </div>
 
-        <div class="container">
+        <div class="container cartao" style="list-style-type:none">
             <div class="row">
                 {% for livro in livros %}
-                    <div class="col-md my-2">
+                    <div class="col-md my-2 cartao" style="list-style-type:none">
                         <div class="card" style="width: 18rem;">
                             <div class="card-body">
-                                <div class="cartao" style="list-style-type:none">
-                                    <p class="cartao card-title py-1">{{livro.título}}<br>
+                                <div>
+                                    <p class="card-title py-1">ID: {{livro.id}}<br><br>
+                                        {{livro.título}}<br>
                                         {{livro.autor}}<br>
                                         {{livro.local_Editora_Ano}}<br>
+                                        <div class="carta">
                                         {% if livro.quantidade == 0 %}
                                         Livro não disponível. Aguarde estar disponível novamente.<br>
                                         {% else %}
@@ -75,10 +77,11 @@
                                         {% if livro.quantidade <= 0 %}
                                         {% else %}
                                             {% if aluno_logado %}
-                                            {% comment %} <button class="btn btn-info mt-1">Solicitar Empréstimo</button> {% endcomment %}
+                                            {% comment %}<button type="" class="btn btn-info mt-1">Solicitar Empréstimo</button>{% endcomment %}
                                             {% else %}
                                             {% endif %}
                                         {% endif %}
+                                        </div>
                                     </p>
                                 </div>
                             </div>
