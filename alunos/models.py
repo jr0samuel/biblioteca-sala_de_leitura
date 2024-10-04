@@ -9,7 +9,7 @@ class Aluno(models.Model):
     senha = models.CharField(max_length=64)
 
     def __str__(self) -> str:
-        return f"{self.nome} | Turma: {self.turma} | RA: {self.ra}"
+        return f"ID: {self.id} | Nome: {self.nome} | Turma: {self.turma} | RA: {self.ra}"
 
 class Prof(models.Model):
     nome = models.CharField(max_length=100)

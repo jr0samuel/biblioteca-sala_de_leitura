@@ -9,7 +9,7 @@ from alunos.models import Aluno, Prof
 
 class Livros(models.Model):
     img = models.ImageField(upload_to='capa_livro', null=True, blank=True)
-    tombo = models.CharField(max_length=20, blank = True, null = True)
+    tombo = models.CharField(max_length=50, blank = True, null = True)
     autor = models.CharField(max_length=100, blank = True, null = True)
     título = models.CharField(max_length=100, blank = True, null = True)
     local_Editora_Ano = models.CharField(max_length=100, blank = True, null = True)
@@ -25,10 +25,3 @@ class Livros(models.Model):
 
     def __str__(self):
         return self.título
-
-class Planilha(models.Model):
-    arquivo = models.CharField(max_length=25, null=True, blank=True)
-    planilha = models.FileField(upload_to='planilhas/')
-
-    def __str__(self):
-        return self.arquivo

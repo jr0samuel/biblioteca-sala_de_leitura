@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from alunos.models import Aluno, Prof
-from .models import Livros, Planilha
-from .forms import CadastroLivro, PlanilhaForm
+from .models import Livros
+from .forms import CadastroLivro
 from datetime import date, datetime
 from django.db.models import F
 
@@ -147,42 +147,3 @@ def cadastrar_livro(request):
             return redirect('/livro/home_admin/?status=0')
         else:
             return redirect('/livro/home_admin/?não_cadastrou')
-
-def tabela1(request):
-    if request.session.get('prof'):
-        prof = Prof.objects.get(id = request.session['prof'])
-        return render(request, 'tabela_1.html', {'prof': prof})
-    else:
-        return redirect('/auth/login_admin/?status=2')
-
-def tabela2(request):
-    if request.session.get('prof'):
-        prof = Prof.objects.get(id = request.session['prof'])
-        return render(request, 'tabela_2.html', {'prof': prof})
-    else:
-        return redirect('/auth/login_admin/?status=2')
-
-def tabela3(request):
-    if request.session.get('prof'):
-        prof = Prof.objects.get(id = request.session['prof'])
-        return render(request, 'tabela_3.html', {'prof': prof})
-    else:
-        return redirect('/auth/login_admin/?status=2')
-
-def planilha_upload(request):
-    prof = Prof.objects.get(id = request.session['prof'])
-    if request.method == 'POST':
-        form = PlanilhaForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return redirect('/livro/planilha_upload')
-    else:
-        form = PlanilhaForm()
-    return render(request, 'planilha_upload.html', {'form': form,
-                                                     'prof': prof})
-
-def planilhas(request):
-    prof = Prof.objects.get(id = request.session['prof'])
-    planilhas = Planilha.objects.all()
-    return render(request, 'planilhas.html', {'planilhas': planilhas,
-                                              'prof': prof})

@@ -69,6 +69,7 @@
                         <div class="card" style="width: 18rem;">
                             <div class="card-body">
                                 <p class="card-title py-1">
+                                    {% comment %} <img class="py-1" width="100%" src="{{livro.img.url}}"> {% endcomment %}
                                     ID: {{livro.id}}<br>
                                     Tombo: {{livro.tombo}}<br><br>
                                     {{livro.título}}<br>
@@ -107,6 +108,7 @@
             <div style="height:71.9vh;"></div>
         {% endif %} -->
 
+        <!--
         <div class="container">
             <nav aria-label="Navegação de página">
               <ul class="pagination">
@@ -130,6 +132,7 @@
               </ul>
             </nav>
         </div>
+        -->
 
         {% if prof_logada or aluno_logado %}
             <!-- <main style="height:69.6999vh;"></main> -->

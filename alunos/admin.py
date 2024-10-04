@@ -4,8 +4,8 @@ from alunos.models import Aluno, Prof
 # Register your models here.
 
 @admin.register(Aluno)
-class AlunoAdmin(admin.ModelAdmin):
-    readonly_fields = ('nome', 'turma', 'ra', 'senha')
+class Aluno(admin.ModelAdmin):
+    readonly_fields = ('id', 'nome', 'turma', 'ra', 'senha')
 
 @admin.register(Prof)
 class ProfAdmin(admin.ModelAdmin):
