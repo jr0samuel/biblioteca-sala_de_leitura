@@ -69,7 +69,7 @@
                                 <label class="pt-1">Aluno</label>
                                 <select class="form-control mb-1" value="{{livro.aluno}}" name="aluno">
                                 {% for i in alunos %}
-                                <option value="{{livro.aluno}}" name="aluno">{{i.nome}} | Turma: {{i.turma}} | RA: {{i.ra}}</option>
+                                <option value="{{livro.aluno}}" name="aluno">id: {{i.id}} | {{i.nome}} | Turma: {{i.turma}} | RA: {{i.ra}}</option>
                                 {% endfor %}
                                 </select>
                                 {% endif %}
@@ -86,7 +86,7 @@
                                 <li><h6 class="card-subtitle my-3 text-muted">A data de entrega do livro é hoje</h6></li>
                                 {% endif %}
                                 {% endif %}
-                            {% if livro.quantidade == 0 %}
+                            {% if livro.quantidade == 0 or livro.aluno != None or livro.data_de_empréstimo != None or livro.data_de_devolução != None %}
                             {% else %}
                             <button type="submit" class="btn btn-info mt-3">Emprestar Livro</button>
                             {% endif %}
@@ -126,7 +126,10 @@
                                     {% endif %}
                                     {% endif %}
                                 </ol>
+                                {% if livro.quantidade == 0 or livro.aluno != None or livro.data_de_empréstimo != None or livro.data_de_devolução != None %}
                                 <button type="submit" class="btn btn-info">Devolver Livro</button>
+                                {% else %}
+                                {% endif %}
                             </div>
                         </div>
                     </div>
