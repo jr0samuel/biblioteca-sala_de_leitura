@@ -1,27 +1,31 @@
+{%load static%}
 <html lang="pt-BR">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>Tabela com os Alunos Cadastrados</title>
+    <script src="{% static 'js/script.js' %}"></script>
 </head>
 <body>
     <main>
         <nav class="navbar navbar-dark bg-dark">
             <a href="{% url 'home_admin' %}" class="btn btn-primary">Ir para Home</a>
+            <input type="text" id="buscarlivros" onkeyup="buscar_livro()" name="busca" placeholder="Buscar Aluno...">
             <h5 class="navbar-brand">Olá, {{prof.nome}}</h5>
         </nav>
 <br>
-        <div class="container">
-            <h2 class="text-center">Alunos Cadastrados</h2><br>
-            <ul style="list-style-type:none" class="justify-content-center">
-                {% for aluno in alunos %}
-                    <h5 class="card-title border border-dark p-1 d-flex justify-content-between">
-                        <span>id: {{aluno.id}} | Nome: {{aluno.nome}} | Turma: {{aluno.turma}} | RA: {{aluno.ra}}</span>
-                        <a><button class="btn btn-dark"><a class="text-light" href="{% url 'aluno_excluir' aluno.id %}">Excluir</a></button></a>
+        
+        <h2 class="text-center" style="padding-right:90px">Alunos Cadastrados</h2><br>
+        <div class="container cartao" style="list-style-type:none">
+            {% for aluno in alunos %}
+                <div class="container justify-content-center cartao" style="list-style-type:none">
+                    <h5 class="card-title border border-dark p-2 d-flex justify-content-between align-items-center">
+                        id: {{aluno.id}} | Nome: {{aluno.nome}} | Turma: {{aluno.turma}} | RA: {{aluno.ra}}<br>
+                        <a class="btn btn-dark text-light" href="{% url 'aluno_excluir' aluno.id %}">Excluir</a>
                     </h5>
-                {% endfor %}
-            </ul>
+                </div>
+            {% endfor %}
         </div>
     </main>
 
