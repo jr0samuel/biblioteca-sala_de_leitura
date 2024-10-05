@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from alunos.models import Aluno, Prof
 from .models import Livros
@@ -153,3 +153,18 @@ def cadastrar_livro(request):
             return redirect('/livro/home_admin/?status=0')
         else:
             return redirect('/livro/home_admin/?não_cadastrou')
+
+def alunos_cadastrados(request):
+    prof = Prof.objects.get(id = request.session['prof'])
+    alunos = Aluno.objects.all()
+    return render(request, 'alunos_cadastrados.html', {'alunos': alunos,
+                                                       'prof': prof})
+
+def aluno_excluir(request, aluno_id):
+    prof = Prof.objects.get(id = request.session['prof'])
+    aluno = get_object_or_404(Aluno, id=aluno_id)
+    if request.method == "POST":
+        aluno.delete()
+        return redirect('/livro/alunos_cadastrados/')
+    return render(request, 'aluno_excluir.html', {'aluno': aluno,
+                                                  'prof': prof})
