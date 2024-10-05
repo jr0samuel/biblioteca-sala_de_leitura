@@ -110,20 +110,24 @@ def ver_livro_admin(request, id):
             return HttpResponse('Esse livro não é seu')
     return redirect('/auth/login_admin/?status=2')
 
-def emprestar_livro(request):# aluno_id
-    # aluno_id = Aluno.objects.get(id=aluno_id)
+def emprestar_livro(request):
     livro_id = request.POST.get('livro_id')
     data_emprestimo = request.POST.get('data_emprestimo')
     data_devolucao = request.POST.get('data_devolucao')
-    # aluno = request.POST.get('aluno')
+    aluno_id = request.POST.get('aluno')
 
     livro_emprestar = Livros.objects.get(id = livro_id)
     if livro_emprestar.prof.id == request.session['prof']:
         livro_emprestar.quantidade = F('quantidade') - 1
         livro_emprestar.data_de_empréstimo = data_emprestimo
         livro_emprestar.data_de_devolução = data_devolucao
-        # livro_emprestar.aluno = aluno
-        # livro_emprestar.aluno = aluno_id
+
+        try:
+            aluno_instance = Aluno.objects.get(id=aluno_id)
+            livro_emprestar.aluno = aluno_instance
+        except Aluno.DoesNotExist:
+            return redirect('/livro/ver_livro/?aluno_nao_encontrado')
+
         livro_emprestar.save()
         livro_emprestar.refresh_from_db()
         return redirect(f'/livro/ver_livro_admin/{livro_id}')

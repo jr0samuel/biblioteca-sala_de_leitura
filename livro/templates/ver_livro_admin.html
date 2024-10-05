@@ -67,9 +67,9 @@
                                 {% endif %}
                                 {% if livro.aluno == None %}
                                 <label class="pt-1">Aluno</label>
-                                <select class="form-control mb-1" value="{{livro.aluno}}" name="aluno">
+                                <select class="form-control mb-1" name="aluno">
                                 {% for i in alunos %}
-                                <option value="{{livro.aluno}}" name="aluno">id: {{i.id}} | {{i.nome}} | Turma: {{i.turma}} | RA: {{i.ra}}</option>
+                                <option value="{{i.id}}" name="aluno">id: {{i.id}} | {{i.nome}} | Turma: {{i.turma}} | RA: {{i.ra}}</option>
                                 {% endfor %}
                                 </select>
                                 {% endif %}
