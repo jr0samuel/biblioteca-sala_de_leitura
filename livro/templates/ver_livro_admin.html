@@ -51,7 +51,7 @@
                                 {% if livro.quantidade <= 0 %}
                                 <li><h6 class="card-subtitle text-muted py-1">Livro não disponível. Aguarde estar disponível novamente.</h6></li>
                                 {% else %}
-                                <li><h6 class="card-subtitle text-muted py-1">Quantidade disponível: {{livro.quantidade}}</h6></li>
+                                <li><h6 class="card-subtitle text-muted py-1">Livro disponível</h6></li>
                                 {% endif %}
                                 <label class="pt-1">Data de Empréstimo:</label>
                                 {% if livro.data_de_empréstimo == None %}
@@ -69,7 +69,7 @@
                                 <label class="pt-1">Aluno</label>
                                 <select class="form-control mb-1" name="aluno">
                                 {% for i in alunos %}
-                                <option value="{{i.id}}" name="aluno">id: {{i.id}} | {{i.nome}} | Turma: {{i.turma}} | RA: {{i.ra}}</option>
+                                <option value="{{i.id}}" name="aluno">id: {{i.id}} | Nome: {{i.nome}} | Turma: {{i.turma}} | RA: {{i.ra}}</option>
                                 {% endfor %}
                                 </select>
                                 {% endif %}
@@ -86,7 +86,7 @@
                                 <li><h6 class="card-subtitle my-3 text-muted">A data de entrega do livro é hoje</h6></li>
                                 {% endif %}
                                 {% endif %}
-                            {% if livro.quantidade == 0 or livro.aluno != None or livro.data_de_empréstimo != None or livro.data_de_devolução != None %}
+                            {% if livro.quantidade <= 0 or livro.quantidade == None or livro.aluno != None or livro.data_de_empréstimo != None or livro.data_de_devolução != None %}
                             {% else %}
                             <button type="submit" class="btn btn-info mt-3">Emprestar Livro</button>
                             {% endif %}
@@ -110,7 +110,7 @@
                                     {% if livro.quantidade <= 0 %}
                                     <li><h6 class="card-subtitle text-muted py-1">Livro não disponível. Aguarde estar disponível novamente.</h6></li>
                                     {% else %}
-                                    <li><h6 class="card-subtitle text-muted py-1">Quantidade disponível: {{livro.quantidade}}</h6></li>
+                                    <li><h6 class="card-subtitle text-muted py-1">Livro disponível</h6></li>
                                     {% endif %}
                                     {% if livro.aluno != None %}
                                     <h5 class="card-title mt-4">Livro Emprestado para:</h5>
@@ -126,7 +126,7 @@
                                     {% endif %}
                                     {% endif %}
                                 </ol>
-                                {% if livro.quantidade == 0 or livro.aluno != None or livro.data_de_empréstimo != None or livro.data_de_devolução != None %}
+                                {% if livro.quantidade <= 0 or livro.quantidade == None or livro.aluno != None or livro.data_de_empréstimo != None or livro.data_de_devolução != None %}
                                 <button type="submit" class="btn btn-info">Devolver Livro</button>
                                 {% else %}
                                 {% endif %}

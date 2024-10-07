@@ -5,4 +5,4 @@ from .models import Livros
 
 @admin.register(Livros)
 class Livros(admin.ModelAdmin):
-    list_display = ("id", "tombo", "título", "autor", "local_Editora_Ano", "quantidade", "aluno")
+    list_display = ("id", "tombo", "título", "autor", "local_Editora_Ano", "aluno", "quantidade")

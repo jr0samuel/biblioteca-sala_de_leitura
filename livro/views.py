@@ -132,11 +132,11 @@ def emprestar_livro(request):
         livro_emprestar.refresh_from_db()
         return redirect(f'/livro/ver_livro_admin/{livro_id}')
     else:
-        return redirect('/livro/ver_livro_admin/?livro_não_emprestado')
+        return redirect('/livro/ver_livro_admin/?livro_nao_emprestado')
 
 def devolver_livro_admin(request, id):
     livro_devolver_admin = Livros.objects.get(id = id)
-    livro_devolver_admin.quantidade = F('quantidade') + 1
+    livro_devolver_admin.quantidade = 1
     livro_devolver_admin.aluno = None
     livro_devolver_admin.data_de_empréstimo = None
     livro_devolver_admin.data_de_devolução = None
@@ -150,9 +150,9 @@ def cadastrar_livro(request):
 
         if form.is_valid():
             form.save()
-            return redirect('/livro/home_admin/?status=0')
+            return redirect('/livro/home_admin/?livro_cadastrado')
         else:
-            return redirect('/livro/home_admin/?não_cadastrou')
+            return redirect('/livro/home_admin/?livro_nao_cadastrado')
 
 def alunos_cadastrados(request):
     prof = Prof.objects.get(id = request.session['prof'])
