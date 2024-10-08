@@ -69,18 +69,11 @@
                                         ID: {{livro.id}}<br><br>
                                         {{livro.título}}<br>
                                         {{livro.autor}}<br>
-                                        {{livro.local_Editora_Ano}}<br>
-                                        {% if livro.quantidade == 0 %}
-                                        Livro não disponível. Aguarde estar disponível novamente.<br>
-                                        {% else %}
-                                        Quantidade disponível: {{livro.quantidade}}<br>
-                                        {% endif %}
+                                        {{livro.local_Editora_Ano}}<br><br>
                                         {% if livro.quantidade <= 0 %}
+                                        Livro não disponível. Aguarde estar disponível novamente.
                                         {% else %}
-                                            {% if aluno_logado %}
-                                            {% comment %}<button type="" class="btn btn-info mt-1">Solicitar Empréstimo</button>{% endcomment %}
-                                            {% else %}
-                                            {% endif %}
+                                        Livro disponível. Converse com a Professora Andreia para ler este livro.
                                         {% endif %}
                                     </p>
                                 </div>
@@ -95,7 +88,9 @@
 
         </main>
 
-        <!-- essas divs é só para quando não tem conteúdo na página, no caso, os livros -->
+        <div style="height:21.25vh"></div>
+
+        <!-- quando não houver conteúdo na página -->
         <!-- {% if aluno_logado or prof_logada %}
             <div style="height:63.25vh;"></div>
         {% else %}
