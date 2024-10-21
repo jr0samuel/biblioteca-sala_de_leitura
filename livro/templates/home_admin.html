@@ -14,29 +14,6 @@
     </head>
     <body>
         <main>
-        <div class="container">
-            {% if status == '0' %}
-                <div class="alert alert-success" role="alert">
-                    Livro cadastrado com sucesso.
-                </div>
-            {% endif %}
-            {% if status == '1' %}
-                <div class="alert alert-danger" role="alert">
-                    Livro não cadastrado. Tente novamente.
-                </div>
-            {% endif %}
-            {% if status == '2' %}
-                <div class="alert alert-success" role="alert">
-                    Livro emprestado com sucesso.
-                </div>
-            {% endif %}
-            {% if status == '3' %}
-                <div class="alert alert-danger" role="alert">
-                    Livro não emprestado. Tente novamente.
-                </div>
-            {% endif %}
-        </div>
-        
         <nav class="navbar navbar-dark bg-dark">
             <a href="{% url 'sala_de_leitura_admin' %}" class="btn btn-primary">Ir para Sala de Leitura</a>
             <h5 class="navbar-brand" style="margin-right:125px;">Olá, {{prof.nome}}</h5>
@@ -44,7 +21,6 @@
                 Sair
             </button>
         </nav>
-
         <div class="d-flex justify-content-around mt-2">
             <a href="https://docs.google.com/document/d/1v4ZQyldB46QFBaTTzleg8ZRPETRlNvHK/edit?usp=sharing&ouid=104290703672750313003&rtpof=true&sd=true" class="btn text-light bg-dark" target="_blank" rel="noreferrer noopener">Ir para Tabela da 1ª Série</a>
             <a href="https://docs.google.com/document/d/1-LwCZ-vZRvTJqtm8krDmYPF4K9k2M5jb/edit?usp=sharing&ouid=104290703672750313003&rtpof=true&sd=true" class="btn text-light bg-dark" target="_blank" rel="noreferrer noopener">Ir para Tabela da 2ª Série</a>
@@ -67,6 +43,19 @@
             </div>
         </div>
 
+        <div class="container">
+            {% if status == '0' %}
+                <div class="alert alert-success" role="alert">
+                    Livro cadastrado com sucesso.
+                </div>
+            {% endif %}
+            {% if status == '1' %}
+                <div class="alert alert-danger" role="alert">
+                    Livro não cadastrado. Tente novamente.
+                </div>
+            {% endif %}
+        </div>
+        
         <div class="row d-flex justify-content-around align-items-center mx-auto" style="height:350px;">
             <button id="botaodadiv" type="button" class="btn btn-info text-center p-5 ml-5" style="font-size:1.5rem" data-toggle="modal" data-target="#exampleModal">
                 Cadastrar Livro

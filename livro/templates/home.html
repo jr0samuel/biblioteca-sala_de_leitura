@@ -39,15 +39,19 @@
         </div>
     </div>
 
-    <div class="container">
+    <div class="container" style="margin-bottom:3px">
         <div class="row">
             {% for livro in livros %}
-                <div class="col-md my-2">
+                <div class="col-md my-1">
                     <div class="card" style="width: 18rem;">
                         <div class="card-body">
                             <ol id="list" style="list-style-type:none">
                               {% comment %} <li><img class="py-1" width="100%" src="{{livro.img.url}}"></li> {% endcomment %}
                               <li><h5 class="card-title py-1">ID: {{livro.id}}</h5></li>
+                              {% if livro.digital.url != None %}
+                              <li><h6 class="card-subtitle mb-2 text-muted py-1">Esse livro é digital, clique abaixo para ler</h6></li>
+                              {% else %}
+                              {% endif %}
                               <li><h5 class="card-title py-1">{{livro.título}}</h5></li>
                               <li><h5 class="card-subtitle mb-2 text-muted py-1">{{livro.autor}}</h5></li>
                               <li><h6 class="card-subtitle mb-2 text-muted py-1">{{livro.local_Editora_Ano}}</h6></li>
@@ -59,6 +63,10 @@
                               <li><h6 class="card-subtitle mb-2 text-muted py-1">A data de entrega do livro é hoje</h6></li>
                               {% endif %}
                             </ol>
+                            {% if livro.digital.url != None %}
+                            <a href="{% url 'ver_livro' livro.id %}" class="btn btn-dark d-flex justify-content-center">Ler livro</a>
+                            {% else %}
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -70,7 +78,7 @@
 
     </main>
 
-    <div style="height:65vh;"></div>
+    {% comment %} <div style="height:65vh;"></div> {% endcomment %}
 
         <!-- <main style="height:67.7vh;"></main> -->
         <footer class="bg-dark d-flex justify-content-center align-items-center" style="height:50px; color:white">™ ® Copyright© &#169</footer>

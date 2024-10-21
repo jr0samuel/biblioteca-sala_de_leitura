@@ -14,8 +14,14 @@
             <input type="text" id="buscarlivros" onkeyup="buscar_livro()" name="busca" placeholder="Buscar Aluno...">
             <h5 class="navbar-brand">Olá, {{prof.nome}}</h5>
         </nav>
-<br>
-        
+        <br>
+        <div class="container">
+            {% if status == '0' %}
+                <div class="alert alert-success" role="alert">
+                    Aluno descadastrado com sucesso.
+                </div>
+            {% endif %}
+        </div>
         <h2 class="text-center" style="padding-right:90px">Alunos Cadastrados</h2><br>
         <div class="container cartao" style="list-style-type:none">
             {% for aluno in alunos %}

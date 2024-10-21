@@ -5,7 +5,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <title>Emprestar Livro - {{livro.título}}</title>
+        <title>Emprestar ou Devolver Livro - {{livro.título}}</title>
         <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
         <script src="{% static 'js/script.js' %}"></script>
     </head>
@@ -33,7 +33,29 @@
                   </div>
                 </div>
             </div>
-
+        <div class="container">
+            {% if status == '1' %}
+                <div class="alert alert-success" role="alert">
+                    Livro emprestado com sucesso.
+                </div>
+            {% endif %}
+            {% if status == '2' %}
+                <div class="alert alert-danger" role="alert">
+                    Livro não emprestado. Tente novamente.
+                </div>
+            {% endif %}
+            {% if status == '3' %}
+                <div class="alert alert-success" role="alert">
+                    Livro devolvido com sucesso.
+                </div>
+            {% endif %}
+            {% if status == '4' %}
+                <div class="alert alert-danger" role="alert">
+                    Aluno não encontrado. Tente novamente.
+                </div>
+            {% endif %}
+        </div>
+        <br>
         <div class="row justify-content-center mx-auto">
             <form action="{% url 'emprestar_livro' %}" method="POST">{% csrf_token %}
             <div class="container">
@@ -45,6 +67,10 @@
                                 {% comment %} <li class="py-1"><img class="py-1" width="100%" src="{{livro.img.url}}"></li> {% endcomment %}
                                 <li><h5 class="card-title">ID: {{livro.id}}</h5></li>
                                 <li><h5 class="card-title">Tombo: {{livro.tombo}}</h5></li>
+                                {% if livro.digital != None %}
+                                <li><h6 class="card-subtitle mb-2 text-muted py-1">Esse livro é digital</h6></li>
+                                {% else %}
+                                {% endif %}
                                 <li><h5 class="card-title">{{livro.título}}</h5></li>
                                 <li><h5 class="card-subtitle mb-2 text-muted py-1">{{livro.autor}}</h5></li>
                                 <li><h6 class="card-subtitle mb-2 text-muted py-1">{{livro.local_Editora_Ano}}</h6></li>
@@ -104,6 +130,10 @@
                                     {% comment %} <li class="py-1"><img class="py-1" width="100%" src="{{livro.img.url}}"></li> {% endcomment %}
                                     <li><h5 class="card-title">ID: {{livro.id}}</h5></li>
                                     <li><h5 class="card-title">Tombo: {{livro.tombo}}</h5></li>
+                                    {% if livro.digital != None %}
+                                    <li><h6 class="card-subtitle mb-2 text-muted py-1">Esse livro é digital</h6></li>
+                                    {% else %}
+                                    {% endif %}
                                     <li><h5 class="card-title">{{livro.título}}</h5></li>
                                     <li><h5 class="card-subtitle mb-2 text-muted py-1">{{livro.autor}}</h5></li>
                                     <li><h6 class="card-subtitle mb-2 text-muted py-1">{{livro.local_Editora_Ano}}</h6></li>

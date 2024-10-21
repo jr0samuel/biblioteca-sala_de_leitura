@@ -87,9 +87,11 @@ def home_admin(request):
     if request.session.get('prof'):
         prof = Prof.objects.get(id = request.session['prof'])
         form = CadastroLivro()
+        status = request.GET.get('status')
 
         return render(request, 'home_admin.html', {'form': form,
-                                                   'prof': prof})
+                                                   'prof': prof,
+                                                   'status': status})
     else:
         return redirect('/auth/login_admin/?status=2')
 
@@ -100,12 +102,14 @@ def ver_livro_admin(request, id):
             prof = Prof.objects.get(id = request.session['prof'])
             alunos = Aluno.objects.all()
             data_atual = date.today
+            status = request.GET.get('status')
             return render(request, 'ver_livro_admin.html', {'livro': livro,
                                                             'id_livro': id,
                                                             'prof_logada': request.session.get('prof'),
                                                             'prof': prof,
                                                             'alunos': alunos,
-                                                            'data_atual': data_atual})
+                                                            'data_atual': data_atual,
+                                                            'status': status})
         else:
             return HttpResponse('Esse livro não é seu')
     return redirect('/auth/login_admin/?status=2')
@@ -126,13 +130,13 @@ def emprestar_livro(request):
             aluno_instance = Aluno.objects.get(id=aluno_id)
             livro_emprestar.aluno = aluno_instance
         except Aluno.DoesNotExist:
-            return redirect('/livro/ver_livro/?aluno_nao_encontrado')
+            return redirect(f'/livro/ver_livro_admin/{livro_id}/?aluno_nao_encontrado/?status=4')
 
         livro_emprestar.save()
         livro_emprestar.refresh_from_db()
-        return redirect(f'/livro/ver_livro_admin/{livro_id}')
+        return redirect(f'/livro/ver_livro_admin/{livro_id}/?livro_emprestado/?status=1')
     else:
-        return redirect('/livro/ver_livro_admin/?livro_nao_emprestado')
+        return redirect(f'/livro/ver_livro_admin/{livro_id}/?livro_nao_emprestado/?status=2')
 
 def devolver_livro_admin(request, id):
     livro_devolver_admin = Livros.objects.get(id = id)
@@ -142,7 +146,7 @@ def devolver_livro_admin(request, id):
     livro_devolver_admin.data_de_devolução = None
     livro_devolver_admin.save()
     livro_devolver_admin.refresh_from_db()
-    return redirect(f'/livro/ver_livro_admin/{id}')
+    return redirect(f'/livro/ver_livro_admin/{id}/?livro_devolvido/?status=3')
 
 def cadastrar_livro(request):
     if request.method == 'POST':
@@ -150,21 +154,23 @@ def cadastrar_livro(request):
 
         if form.is_valid():
             form.save()
-            return redirect('/livro/home_admin/?livro_cadastrado')
+            return redirect('/livro/home_admin/?livro_cadastrado/?status=0')
         else:
-            return redirect('/livro/home_admin/?livro_nao_cadastrado')
+            return redirect('/livro/home_admin/?livro_nao_cadastrado/?status=1')
 
 def alunos_cadastrados(request):
     prof = Prof.objects.get(id = request.session['prof'])
     alunos = Aluno.objects.all()
+    status = request.GET.get('status')
     return render(request, 'alunos_cadastrados.html', {'alunos': alunos,
-                                                       'prof': prof})
+                                                       'prof': prof,
+                                                       'status': status})
 
 def aluno_excluir(request, aluno_id):
     prof = Prof.objects.get(id = request.session['prof'])
     aluno = get_object_or_404(Aluno, id=aluno_id)
     if request.method == "POST":
         aluno.delete()
-        return redirect('/livro/alunos_cadastrados/')
+        return redirect('/livro/alunos_cadastrados/?aluno_descadastrado/?status=0')
     return render(request, 'aluno_excluir.html', {'aluno': aluno,
                                                   'prof': prof})

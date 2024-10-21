@@ -9,6 +9,7 @@ from alunos.models import Aluno, Prof
 
 class Livros(models.Model):
     # img = models.ImageField(upload_to='capa_livro', null=True, blank=True)
+    digital = models.FileField(upload_to='livro_digital', null=True, blank=True)
     tombo = models.CharField(max_length=50, blank = True, null = True)
     autor = models.CharField(max_length=100, blank = True, null = True)
     título = models.CharField(max_length=100, blank = True, null = True)
